@@ -8,6 +8,7 @@ def to_lower(directory):
         for dirname in dirnames:
             os.rename(dirpath+"/"+dirname, dirpath+"/"+dirname.lower())
 
+
 def to_upper(directory):
     for dirpath, dirnames, filenames in os.walk(directory):
         print(dirpath, dirnames, filenames)
