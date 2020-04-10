@@ -7,8 +7,9 @@ def encode(from_file, to_file):
     with open(from_file, "br") as f1:
         bytes_list = ["{:08b}".format(word) for word in f1.read()]
     byte_string = ''.join(bytes_list)
+    # if not len(byte_string)%6:
     byte_string += '0' * (6- len(byte_string)%6)
-    divided_string = [byte_string[i:i+6] for i in range(0, len(byte_string)-5, 6)]
+    divided_string = [byte_string[i:i+6] for i in range(0, len(byte_string), 6)]
     
     with open(to_file, "w") as f2:
         for c in divided_string:
