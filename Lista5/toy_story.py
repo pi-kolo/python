@@ -1,7 +1,9 @@
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LinearRegression
+import time
 
+t1 = time.time()
 data = pd.read_csv("ml-latest-small/ratings.csv")
 data_arr = data[['userId', 'movieId', 'rating']].to_numpy()
 
@@ -21,7 +23,7 @@ def get_m_movies_ratings(n, m):
     for user, movie, rate in toy_storied_movies:
         index = np.where(toy_storied.T[0] == user)[0][0]
         if movie > 1 and movie < m and index < n:
-            ratings[np.where(toy_storied.T[0] == user)[0][0], int(movie)-2] = rate
+            ratings[index, int(movie)-2] = rate
     return ratings
 
 def regression(m_movies, n_users):
@@ -36,3 +38,5 @@ ratings = get_m_movies_ratings(215, 10000)
 clf, X, Y = regression(10000, 200)
 for i in range(200, 215):
     print(f"{clf.predict([ratings[i]])} vs {toy_storied[i][2]}")
+
+print(time.time()-t1)
